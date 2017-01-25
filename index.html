@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div>Managing CSS at scale</div>
+
+    <div>Why?</div>
+
+    <div>Top complaints about css</div>
+    <div>Global scope (inheritance, cascading)</div>
+    <!-- undo css, overrides -->
+
+    <div>Not a real programming language</div>
+    <div>Naming (&amp; specificity)</div>
+
+    <div>How?</div>
+    <div>
+      <ol>
+        <li>Architecture</li>
+        <li>Naming</li>
+      </ol>
+    </div>
+
+
+    <div><em>Architecture</em></div>
+
+    <div>
+      <em>I</em>nverted<br/>
+      <em>T</em>riangle<br/>
+      <em>C</em><br/>
+      <em>S</em><br/>
+      <em>S</em>
+    </div>
+
+    <div>Write CSS in <em>specificity order</em></div>
+
+    <div class"imageText"><img src="img/01.jpg" />
+      <!-- images too -->
+    </div>
+
+    <div class"imageText"><img src="img/02.jpg" /></div>
+
+    <div>Layers with specific meanings</div>
+
+    <div class"imageText"><img src="img/04.jpg" /></div>
+    <div class"imageText"><img src="img/05.jpg" /></div>
+    <div class"imageText"><img src="img/06.jpg" /></div>
+    <div class"imageText"><img src="img/07.jpg" /></div>
+
+    <div class"imageText"><img src="img/03.jpg" /></div>
+
+    <!-- <div>Take advantage of CSSs 'problems'</div> -->
+
+    <div>
+      <ol>
+        <li>Settings</li>
+        <li>Tools</li>
+        <li>Generic</li>
+        <li>Base</li>
+        <li>Objects</li>
+        <li>Components</li>
+        <li>Trumps</li>
+      </ol>
+    </div>
+
+    <div>
+      <ol>
+        <li>Settings</li>
+        <li class="del">Tools</li>
+        <li class="del">Generic</li>
+        <li>Base</li>
+        <li>Objects</li>
+        <li>Components</li>
+        <li>Trumps</li>
+      </ol>
+
+      <!-- additional layers -->
+    </div>
+
+    <div>
+      <em>Settings:</em><br />
+      Brand colors, other variables, default values&hellip;
+    </div>
+    <div>
+      <pre>
+$brand-primary: <em>#eadcbe</em>;
+$brand-secondary: <em>#333</em>;
+
+$text-color: <em>#222</em>;
+$font-family-base: <em>sans-serif</em>;
+      </pre>
+    </div>
+
+    <div>
+      <em>Base:</em><br>
+      Resets, inherited styles, classless HTML elements&hellip;
+    </div>
+
+    <div>
+    <pre>
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: <em>$brand-primary</em>;
+}
+    </pre>
+    </div>
+
+    <div class="center">
+      WARNING!!!
+      ONLY CLASS SELECTORS FROM NOW ON
+    </div>
+
+    <div>
+      <em>Objects:</em><br>
+      preferably non-cosmetic,
+      highly reusable,
+      childless
+    </div>
+
+    <div>
+      <pre>
+.button {
+  ...
+}
+
+.row {
+  ...
+}
+
+.col {
+  ...
+}
+      </pre>
+    </div>
+
+    <div>
+      <em>Components:</em><br>
+      More specific, designed, usually have children elements
+    </div>
+
+    <div>
+      <pre>
+.header {
+  ...
+}
+
+.header__upper {
+  ...
+}
+
+.footer {
+  ...
+}
+      </pre>
+    </div>
+
+    <div>
+      <em>Trumps:</em><br>
+      Overrides, utility classes,
+    </div>
+
+    <div>
+      <pre>
+.clearfix {
+  ... <em>!important</em>;
+}
+      </pre>
+    </div>
+
+
+    <div>
+      specificity <em>slowly increases</em>
+    </div>
+
+    <div>
+      rules progressively affect <em>smaller parts of the DOM</em>
+    </div>
+
+    <div>
+      never undoing
+    </div>
+
+    <div>
+      <pre>
+  styles-folder
+  ├── 0.config
+  │   ├── _variables.scss
+  │   └── _mixins.scss
+  ├── 1.base
+  │   ├── _forms.scss
+  │   ...
+  │   └── _images.scss
+  ├── 2.objects
+  │   ├── _button.scss
+  │   ...
+  │   └── _grid.scss
+  ├── 3.components
+  │   ├── _main-footer.scss
+  │   ...
+  │   └── _primary-nav.scss
+  ├── 4.trumps
+  │   ├── _print.scss
+  │   └── _utilities.scss
+  └── style.scss
+      </pre>
+    </div>
+
+    <div>
+      Outcomes
+      <ul>
+        <li>Everything has a place to live</li>
+        <li>People know where to look to find types of rules</li>
+        <li>Source order that makes sense</li>
+        <li>Reduced redundancy</li>
+        <li>Increased scalability</li>
+        <li>No specifity wars</li>
+      </ul>
+    </div>
+
+    <div><em>Naming</em></div>
+
+    <div>BEM</div>
+    <div><pre>.block__element--modifier</pre></div>
+    <div>
+      <pre>
+.button
+.button__icon
+.button--primary
+
+.list__item--forbidden
+      </pre>
+    </div>
+
+    <div class="center">Bonus round: Namespacing</div>
+    <div><em>x-</em> before BEM naming</div>
+    <div><pre>.<em>c-</em>sidebar__item--highlight</pre></div>
+
+    <div>
+      <ul>
+        <li><em>o-</em> for objects</li>
+        <li><em>c-</em> for components</li>
+        <li><em>u-</em> for utility classes</li>
+      </ul>
+    </div>
+
+    <div>
+      Other possibilities / suggestions
+      <ul>
+        <li><em>is-</em> for state</li>
+        <li><em>_</em> for hacks</li>
+        <li><em>js-</em> for javascript hooks</li>
+      </ul>
+    </div>
+
+
+    <div>
+      So...
+    </div>
+
+    <div>
+      <span class="nowrap">Namespaced BEM + ITCSS = ❤️</span>
+    </div>
+
+    <div></div>
+    <!-- <div>EXAMPLES</div> -->
+
+    <div>
+      References:
+      <ul>
+        <li><a href="https://speakerdeck.com/dafed/managing-css-projects-with-itcss">ITCSS</a></li>
+        <li><a href="http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/">Namespacing</a></li>
+        <li><a href="http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/">BEM</a></li>
+        <li><a href="http://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/">ITCSS + BEM</a></li>
+        <li><a href="http://cssguidelin.es/">CSS Guidelines</a></li>
+      </ul>
+    </div>
+
+    <!-- http://ecss.io/ -->
+  </body>
+</html>
